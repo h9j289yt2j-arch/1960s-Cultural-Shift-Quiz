@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echoes of an Iconic Era: The 1960s Cultural Shift</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Inter:wght@300;400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #fcfbf9;
+            color: #2b2b2b;
+        }
+        h1, h2, h3, .playfair {
+            font-family: 'Playfair Display', serif;
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col justify-between">
+
+    <!-- Header / Title -->
+    <header class="w-full bg-[#2c221e] text-[#f4efe6] py-6 px-4 shadow-md border-b-4 border-[#b85d33]">
+        <div class="max-w-3xl mx-auto text-center">
+            <span class="text-xs uppercase tracking-widest text-[#d49b6a] font-semibold">An Interactive Historical Insight Quiz</span>
+            <h1 class="text-3xl md:text-4xl font-bold mt-1">Echoes of an Iconic Era: The 1960s Cultural Shift</h1>
+            <p class="text-sm text-stone-300 mt-1 italic">Discover which point of view of the transformative time of the sixties resonates with your worldview!</p>
+        </div>
+    </header>
+
+    <!-- Main Container -->
+    <main class="w-full max-w-2xl mx-auto px-4 py-8 flex-grow">
+
+        <!-- Intro Section -->
+        <div id="intro-screen" class="bg-white rounded-xl shadow-sm border border-stone-200 p-6 md:p-8 space-y-6">
+            <div class="relative h-48 rounded-lg overflow-hidden shadow-inner">
+                <img src="https://images.unsplash.com/photo-1517457373958-b7bdd4587205?auto=format&fit=crop&w=800&q=80" alt="1960s vibe" class="w-full h-full object-cover filter sepia-[0.3]">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent flex items-end p-4">
+                    <span class="text-white text-xs uppercase tracking-widest font-medium bg-[#b85d33] px-2 py-1 rounded">Civil Rights • Vietnam • Counterculture</span>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <h2 class="text-2xl font-bold text-stone-800">What will be your takeaway?</h2>
+                <p class="text-stone-600 leading-relaxed text-sm md:text-base">
+                    The 1960s were more than just a decade; it was an era of profound change in the American consciousness. From the struggles of the Civil Rights Movement, the quagmire that was the Vietnam War, and the psychedelic movement of the counterculture, society was forced to pick a lane.
+                </p>
+                <p class="text-stone-600 leading-relaxed text-sm md:text-base">
+                    Take this quiz to uncover where your ideological view would have anchored you during one of America's most turbulent and transformative times. Your answers will mirror the categorical views of the times—also look into the movie recommendations that can deepen your understanding of the views and subjects.
+                </p>
+            </div>
+
+            <button onclick="startQuiz()" class="w-full py-3 bg-[#b85d33] hover:bg-[#a04e28] text-white font-semibold rounded-lg shadow transition duration-200 uppercase tracking-wider text-sm">
+                Begin the Quiz
+            </button>
+        </div>
+
+        <!-- Quiz Screen -->
+        <div id="quiz-screen" class="hidden bg-white rounded-xl shadow-sm border border-stone-200 p-6 md:p-8 space-y-6">
+            <div class="flex justify-between items-center text-xs font-semibold text-stone-400 tracking-wider uppercase">
+                <span id="question-tracker">Question 1 of 4</span>
+                <span id="topic-badge" class="text-[#b85d33]">Civil Rights Movement</span>
+            </div>
+
+            <div class="space-y-3">
+                <h3 id="question-text" class="text-xl font-bold text-stone-900 leading-snug"></h3>
+            </div>
+
+            <div id="options-container" class="space-y-3">
+                <!-- Dynamic options injected here -->
+            </div>
+        </div>
+
+        <!-- Results Screen -->
+        <div id="results-screen" class="hidden bg-white rounded-xl shadow-sm border border-stone-200 p-6 md:p-8 space-y-6">
+            <div class="text-center pb-4 border-b border-stone-100">
+                <span class="text-xs uppercase tracking-widest text-[#b85d33] font-semibold">Your 1960s Archetype</span>
+                <h2 id="result-title" class="text-3xl font-bold text-stone-900 mt-1"></h2>
+            </div>
+
+            <div class="flex flex-col md:flex-row gap-6 items-center">
+                <div id="result-image-container" class="w-full md:w-1/2 h-52 rounded-lg overflow-hidden shadow-inner flex-shrink-0">
+                    <img id="result-image" src="" alt="Result archetype" class="w-full h-full object-cover">
+                </div>
+                <div class="w-full md:w-1/2 space-y-3">
+                    <p id="result-description" class="text-stone-600 text-sm leading-relaxed"></p>
+                    <div class="p-3 bg-stone-50 border-l-4 border-[#b85d33] rounded-r-lg">
+                        <p class="text-xs text-stone-500 italic"><strong class="text-stone-700">The Road Ahead:</strong> <span id="result-challenges"></span></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Recommendations Section -->
+            <div class="space-y-3 pt-2">
+                <h4 class="text-sm font-bold uppercase tracking-wider text-stone-800">Curated Media & Further Exploration</h4>
+                <div id="recommendations-container" class="grid grid-cols-1 gap-3 text-sm">
+                    <!-- Dynamic recommendations -->
+                </div>
+            </div>
+
+            <!-- Comparison Note -->
+            <div class="p-4 bg-[#f9f8f5] rounded-lg border border-stone-200 text-xs text-stone-600 leading-relaxed">
+                <strong class="text-stone-800 font-semibold">How you compare:</strong> Unlike the radical countercultural idealists or staunch institutional traditionalists, your stance reflects a specific tension between active moral duty and systemic transformation. 
+            </div>
+
+            <!-- Action Buttons & Sharing -->
+            <div class="space-y-3 pt-4 border-t border-stone-100">
+                <div class="flex flex-col sm:flex-row gap-3">
+                    <button onclick="shareResults()" class="flex-1 py-2.5 bg-stone-800 hover:bg-stone-900 text-white font-medium rounded-lg text-xs uppercase tracking-wider transition">
+                        Share Results 🔗
+                    </button>
+                    <button onclick="retakeQuiz()" class="flex-1 py-2.5 bg-stone-200 hover:bg-stone-300 text-stone-800 font-medium rounded-lg text-xs uppercase tracking-wider transition">
+                        Retake Quiz ↺
+                    </button>
+                </div>
+                <div class="text-center pt-2">
+                    <a href="#" onclick="alert('Thank you for connecting! Stay tuned for upcoming historical retrospectives.'); return false;" class="inline-block text-xs font-semibold text-[#b85d33] hover:underline uppercase tracking-wider">
+                        Call to Action: Follow our historical blog for weekly deep-dives →
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="w-full text-center py-4 text-xs text-stone-400 border-t border-stone-200 mt-8">
+        &copy; 2026 Echoes of an Iconic Era Project. Designed with historical depth.
+    </footer>
+
+    <script>
+        const questions = [
+            {
+                topic: "Civil Rights Movement",
+                question: "The issue of racial segregation often polarized communities, choked community progress, and caused calls for large systemic changes—what is your immediate ethical and tactical insight to deal with the issue?",
+                options: [
+                    { text: "Organize sustained, disciplined, nonviolent civil disobedience demonstrations to force systemic social change through direct action.", type: "activist" },
+                    { text: "Build independent local aid networks, voter registration programs, and armed community protection organizations to promote economic and social self-sufficiency independent of the country's social position.", type: "radical" },
+                    { text: "Lobby existing political structures and legislative halls to pass large, sweeping anti-discrimination legislation.", type: "reformer" },
+                    { text: "Prioritize institutional stability and civic compliance, while promoting gradual attitudinal change.", type: "traditionalist" }
+                ]
+            },
+            {
+                topic: "The Vietnam War",
+                question: "As televised footage of an escalating and controversial overseas war is broadcast nightly to American living rooms, what is your stance on the conflict?",
+                options: [
+                    { text: "Take to the streets in mass anti-war demonstrations, draft card and flag burnings, and radical anti-imperialist protests.", type: "radical" },
+                    { text: "Carefully analyze the conflict's geopolitical importance and the balance of power, and advocate for measured, diplomatic de-escalation or resolution instead of an immediate pullout.", type: "reformer" },
+                    { text: "Engage in conscientious objection, witness campaigns, and efforts for a peaceful, legislative end to the conflict.", type: "activist" },
+                    { text: "Support national leadership and the military commitment to protect American national security and order, viewing dissent as dangerous and counterproductive.", type: "traditionalist" }
+                ]
+            },
+            {
+                topic: "Counterculture",
+                question: "The large youth movements reject traditional values, family structures, and capitalist ideology in favor of communal living and an altered or “enlightened” consciousness. What is your reaction?",
+                options: [
+                    { text: "Decry the erosion of moral discipline, respect for traditional values/authority, and the traditional work ethic as societal decay.", type: "traditionalist" },
+                    { text: "Harness artistic expression, folk music, and underground or new-age journalism as cultural tools to awaken the public consciousness.", type: "activist" },
+                    { text: "Drop out entirely of your old life, grow your hair, embrace psychedelic and conscious exploration, and build alternative communal societies.", type: "radical" },
+                    { text: "Appreciate the desire for more authentic human connection, but move to integrate these new cultural movements into a more constructive civic dialogue.", type: "reformer" }
+                ]
+            },
+            {
+                topic: "Synthesis & Legacy of an Era",
+                question: "Looking back across the tumultuous decade that was the 1960s, what legacy should the 1960s ultimately leave behind?",
+                options: [
+                    { text: "A time of progressive reform that successfully modernized the government through landmark legislation while preserving democratic institutions.", type: "reformer" },
+                    { text: "An era of radical change to dismantle oppressive hierarchies—racial, imperialist, and cultural—and birth a radically transformed society.", type: "radical" },
+                    { text: "A cautionary tale of what happens when polarization stems from challenges to traditional order and moral anchors, or when those anchors change too quickly and radically.", type: "traditionalist" },
+                    { text: "A transformative time of expansion of democratic rights, civil protections, and social justice for marginalized and misrepresented portions of the population.", type: "activist" }
+                ]
+            }
+        ];
+
+        const resultsData = {
+            activist: {
+                title: "The Principled Mobilizer",
+                image: "https://images.unsplash.com/photo-1541872703-74c5e44368f9?auto=format&fit=crop&w=800&q=80",
+                description: "Those who land here embody the heart of the Civil Rights movement and organized anti-war civil disobedience. You believe that true systemic change requires discipline and moral sacrifice, as well as a pragmatic legal strategy and public pressure. You want to balance moral righteousness with tactical means for real change.",
+                challenges: "You may experience heavy burnout or adversity from being in between impatient radicals and stubborn traditionalists.",
+                recommendations: [
+                    { title: "🎬 Movie Recommendation: ‘Selma’ (2014)", link: "#" }
+                ]
+            },
+            radical: {
+                title: "The Countercultural Revolutionary",
+                image: "https://images.unsplash.com/photo-1508700115892-45ecd05ae2ad?auto=format&fit=crop&w=800&q=80",
+                description: "Those of you in this archetype fully reject anything traditional. Whether marching against the government and the Vietnam War, or establishing intentional communes, you sought to overthrow the entire idea of mid-century conformity. You live by your deeply held convictions that incremental change is just preservation of the status quo.",
+                challenges: "While your vision sparks a push for cultural rebirth, sustaining long-term organizational or philosophical unity can be exceptionally difficult and may end up getting in the way of the change you advocate.",
+                recommendations: [
+                    { title: "🎬 Movie Recommendation: ‘Easy Rider’ (1969)", link: "#" }
+                ]
+            },
+            reformer: {
+                title: "The Pragmatic Progressive",
+                image: "https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=800&q=80",
+                description: "You appreciate the passion of mass demonstrations and the urgency of civil rights, but you also believe the key to long-lasting progress and cultural balance is through institutions and legislative change. You champion steady, constructive policy changes that secure rights and make balanced, pragmatic decisions without tipping society into chaos or ignoring the real issues at hand.",
+                challenges: "You often find yourself caught between the radical elements of both sides, either demanding instant and radical change or resisting any reform at all.",
+                recommendations: [
+                    { title: "🎬 Movie Recommendation: ‘The Trial of the Chicago 7’ (2020)", link: "#" }
+                ]
+            },
+            traditionalist: {
+                title: "The Advocate of Order",
+                image: "https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?auto=format&fit=crop&w=800&q=80",
+                description: "Those of you who hold this view value stability, institutional continuity, and a sense of national cohesion and values over experimental cultural shifts and calls for change. In an era of dizzying disruption and confusion about what American identity means, you serve as an advocate for a steady anchor in established civic and moral foundations.",
+                challenges: "You risk becoming disconnected from the legitimate grievances of proponents of new movements and changes demanding social evolution.",
+                recommendations: [
+                    { title: "🎬 Movie Recommendation: ‘Forrest Gump’ (1994)", link: "#" }
+                ]
+            }
+        };
+
+        let currentQuestionIndex = 0;
+        let userScores = { activist: 0, radical: 0, reformer: 0, traditionalist: 0 };
+
+        function startQuiz() {
+            document.getElementById('intro-screen').classList.add('hidden');
+            document.getElementById('quiz-screen').classList.remove('hidden');
+            loadQuestion();
+        }
+
+        function loadQuestion() {
+            const q = questions[currentQuestionIndex];
+            document.getElementById('question-tracker').innerText = `Question ${currentQuestionIndex + 1} of ${questions.length}`;
+            document.getElementById('topic-badge').innerText = q.topic;
+            document.getElementById('question-text').innerText = q.question;
+
+            const container = document.getElementById('options-container');
+            container.innerHTML = '';
+
+            q.options.forEach((opt) => {
+                const button = document.createElement('button');
+                button.className = "w-full text-left p-4 rounded-lg border border-stone-200 hover:border-[#b85d33] hover:bg-stone-50 transition text-sm text-stone-700 font-medium flex items-center justify-between group";
+                button.innerHTML = `<span>${opt.text}</span> <span class="text-stone-300 group-hover:text-[#b85d33] font-bold ml-2">→</span>`;
+                button.onclick = () => selectOption(opt.type);
+                container.appendChild(button);
+            });
+        }
+
+        function selectOption(type) {
+            userScores[type]++;
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quiz-screen').classList.add('hidden');
+            document.getElementById('results-screen').classList.remove('hidden');
+
+            let highestType = 'activist';
+            let maxScore = -1;
+            for (let type in userScores) {
+                if (userScores[type] > maxScore) {
+                    maxScore = userScores[type];
+                    highestType = type;
+                }
+            }
+
+            const res = resultsData[highestType];
+            document.getElementById('result-title').innerText = res.title;
+            document.getElementById('result-image').src = res.image;
+            document.getElementById('result-description').innerText = res.description;
+            document.getElementById('result-challenges').innerText = res.challenges;
+
+            const recContainer = document.getElementById('recommendations-container');
+            recContainer.innerHTML = '';
+            res.recommendations.forEach(rec => {
+                const item = document.createElement('a');
+                item.href = rec.link;
+                item.className = "p-3 bg-stone-50 border border-stone-200 rounded-lg hover:bg-stone-100 transition text-stone-700 font-medium block";
+                item.innerText = rec.title;
+                recContainer.appendChild(item);
+            });
+        }
+
+        function retakeQuiz() {
+            currentQuestionIndex = 0;
+            userScores = { activist: 0, radical: 0, reformer: 0, traditionalist: 0 };
+            document.getElementById('results-screen').classList.add('hidden');
+            document.getElementById('intro-screen').classList.remove('hidden');
+        }
+
+        function shareResults() {
+            if (navigator.clipboard) {
+                navigator.clipboard.writeText(window.location.href);
+                alert("Quiz link copied to clipboard! Share it with your friends.");
+            } else {
+                alert("Thanks for sharing this quiz!");
+            }
+        }
+    </script>
+</body>
+</html>
